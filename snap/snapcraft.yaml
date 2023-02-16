@@ -6,6 +6,10 @@
   base: core18
   grade: stable
   
+  architectures:
+    - build-on: [ amd64 ]
+    - build-on: [ arm64 ]
+  
   parts:
     syncappkiosk:
       plugin: flutter
