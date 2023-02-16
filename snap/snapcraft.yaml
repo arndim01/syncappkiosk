@@ -15,4 +15,4 @@
   apps:
     sync-kiosk:
       command: sync_kiosk
-      extentions: [flutter-dev]
+      extensions: [flutter-dev]
