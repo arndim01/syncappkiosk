@@ -18,5 +18,5 @@
 
   apps:
     syncappkiosk:
-      command: sync_app_kiosk
+      command: syncappkiosk
       extensions: [flutter-dev]
