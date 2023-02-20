@@ -37,7 +37,7 @@ class GetStartedPage extends StatelessWidget {
                             style:
                                 TextStyle(color: Colors.white, fontSize: 32))),
                     onTap: () {
-                      //Navigator.of(context).pushNamed('/kioskmain');
+                      Navigator.of(context).pushNamed('/kioskmain');
                     },
                   ),
                 ),
