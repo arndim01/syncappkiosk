@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.center,
-            child: DpLogo(height: 110.23, width: 257),
+            child: DpLogo(height: 170.23, width: 357),
           ),
           Align(
             alignment: Alignment.bottomCenter,

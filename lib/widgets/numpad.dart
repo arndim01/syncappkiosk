@@ -125,9 +125,9 @@ class Numpad extends StatelessWidget {
                 icon: Icon(
                   Icons.arrow_back,
                   color: iconColor,
-                  size: 50,
+                  size: 80,
                 ),
-                iconSize: 40,
+                iconSize: 70,
               ),
             ],
           ),

@@ -17,8 +17,8 @@ class AppHeader extends StatelessWidget {
           const SizedBox(),
           Container(
               padding: const EdgeInsets.all(10),
-              width: 139,
-              height: 61,
+              width: 180,
+              height: 71,
               decoration: BoxDecoration(
                   color: DpColors.mainRed,
                   borderRadius: BorderRadius.circular(10),
@@ -29,17 +29,18 @@ class AppHeader extends StatelessWidget {
                         offset: const Offset(0, 4))
                   ]),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
                   SizedBox(
                     child: Icon(
                       Icons.contact_support_outlined,
                       color: Colors.white,
+                      size: 35,
                     ),
                   ),
                   SizedBox(
                     child: Text('Help',
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                        style: TextStyle(color: Colors.white, fontSize: 25)),
                   )
                 ],
               ))

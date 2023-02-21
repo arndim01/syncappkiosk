@@ -13,7 +13,7 @@ class GetStartedPage extends StatelessWidget {
           children: [
             const Align(
               alignment: Alignment.center,
-              child: DpLogo(height: 110.23, width: 257),
+              child: DpLogo(height: 170.23, width: 387),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -33,8 +33,8 @@ class GetStartedPage extends StatelessWidget {
                     customBorder: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: const SizedBox(
-                        width: 212,
-                        height: 66,
+                        width: 272,
+                        height: 86,
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
@@ -42,7 +42,7 @@ class GetStartedPage extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   color: Colors.white,
-                                  fontSize: 32),
+                                  fontSize: 45),
                               textAlign: TextAlign.center,
                             ))),
                     onTap: () {
