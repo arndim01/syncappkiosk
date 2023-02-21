@@ -19,6 +19,8 @@ class ServiceList extends StatelessWidget {
             child: Column(
               children: [
                 Container(
+                  width: 250,
+                  height: 200,
                   padding: const EdgeInsets.only(
                       top: 10, left: 30, right: 30, bottom: 10),
                   decoration: BoxDecoration(
@@ -33,18 +35,18 @@ class ServiceList extends StatelessWidget {
                   child: const Icon(
                     Icons.money_outlined,
                     color: Colors.white,
-                    size: 66,
+                    size: 100,
                   ),
                 ),
                 SizedBox(
-                  height: 65,
+                  height: 90,
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       'Cash In',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 35,
+                          fontSize: 55,
                           shadows: [
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.25),

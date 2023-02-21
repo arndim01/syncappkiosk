@@ -18,7 +18,7 @@ class _InputFormState extends State<InputForm> {
       Container(
         margin: const EdgeInsets.only(top: 40),
         child: Numpad(
-          buttonSize: 60,
+          buttonSize: 90,
           buttonColor: DpColors.mainBGButtonNumpad,
           iconColor: Colors.deepOrange,
           controller: _myController,
@@ -48,8 +48,8 @@ class _InputFormState extends State<InputForm> {
               padding:
                   const EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               child: SizedBox(
-                height: 40,
-                width: 200,
+                height: 60,
+                width: 300,
                 child: Center(
                   child: TextField(
                     decoration: const InputDecoration(border: InputBorder.none),
@@ -57,7 +57,7 @@ class _InputFormState extends State<InputForm> {
                     textAlign: TextAlign.right,
                     showCursor: false,
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 50,
                         color: DpColors.mainBlack,
                         shadows: [
                           BoxShadow(
@@ -75,7 +75,7 @@ class _InputFormState extends State<InputForm> {
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               child: Text(
                 'Gcash Account',
-                style: TextStyle(color: Colors.white, fontSize: 15),
+                style: TextStyle(color: Colors.white, fontSize: 25),
                 textAlign: TextAlign.left,
               ))
         ],

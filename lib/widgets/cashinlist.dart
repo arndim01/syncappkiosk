@@ -17,7 +17,7 @@ class CashInList extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.asset('./assets/imgs/gcash.png',
-                  width: 250, height: 250),
+                  width: 350, height: 250, filterQuality: FilterQuality.medium),
             ),
           ),
           SizedBox(
@@ -25,7 +25,7 @@ class CashInList extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   'Cash In',
-                  style: TextStyle(color: Colors.white, fontSize: 30, shadows: [
+                  style: TextStyle(color: Colors.white, fontSize: 50, shadows: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.25),
                         blurRadius: 4,

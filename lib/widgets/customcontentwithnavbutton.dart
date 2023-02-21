@@ -18,8 +18,8 @@ class CustomContentWithNavButton extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Ink(
-              width: 147,
-              height: 262,
+              width: 260,
+              height: 472,
               decoration: BoxDecoration(
                   image: const DecorationImage(
                       image: AssetImage('./assets/imgs/back-bg.png'),
@@ -30,10 +30,10 @@ class CustomContentWithNavButton extends StatelessWidget {
               child: InkWell(
                 customBorder: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(150),
-                        bottomRight: Radius.circular(150))),
+                        topRight: Radius.circular(300),
+                        bottomRight: Radius.circular(300))),
                 child: const Icon(Icons.arrow_circle_left_outlined,
-                    size: 110, color: Colors.white),
+                    size: 200, color: Colors.white),
                 onTap: () {
                   Navigator.of(context).pushNamed(goBack);
                 },
@@ -47,8 +47,8 @@ class CustomContentWithNavButton extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Ink(
-              width: 147,
-              height: 262,
+              width: 260,
+              height: 472,
               decoration: BoxDecoration(
                   image: const DecorationImage(
                       image: AssetImage('./assets/imgs/ok-bg.png'),
@@ -59,10 +59,10 @@ class CustomContentWithNavButton extends StatelessWidget {
               child: InkWell(
                 customBorder: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(150),
-                        bottomLeft: Radius.circular(150))),
+                        topLeft: Radius.circular(300),
+                        bottomLeft: Radius.circular(300))),
                 child: const Icon(Icons.arrow_circle_right_outlined,
-                    size: 110, color: Colors.white),
+                    size: 200, color: Colors.white),
                 onTap: () {
                   Navigator.of(context).pushNamed(goTo);
                 },
