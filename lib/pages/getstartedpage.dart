@@ -30,12 +30,21 @@ class GetStartedPage extends StatelessWidget {
                             offset: const Offset(0, 4))
                       ]),
                   child: InkWell(
-                    child: Container(
-                        padding: const EdgeInsets.only(
-                            top: 20, bottom: 20, left: 40, right: 40),
-                        child: const Text('Get Started',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 32))),
+                    customBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const SizedBox(
+                        width: 212,
+                        height: 66,
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Get Started',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white,
+                                  fontSize: 32),
+                              textAlign: TextAlign.center,
+                            ))),
                     onTap: () {
                       Navigator.of(context).pushNamed('/kioskmain');
                     },

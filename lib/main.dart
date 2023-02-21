@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:syncappkiosk/pages/cashinservicepage.dart';
+import 'package:syncappkiosk/pages/gcashformpage.dart';
 import 'package:syncappkiosk/pages/getstartedpage.dart';
 import 'package:syncappkiosk/pages/kioskmainpage.dart';
 import 'package:syncappkiosk/pages/splashpage.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: CashInServicePage(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +32,9 @@ class MyApp extends StatelessWidget {
         },
         routes: {
           '/': (context) => const SplashPage(duration: 2, goToPage: '/started'),
-          '/kioskmain': (context) => const KioskMainPage()
+          '/kioskmain': (context) => const KioskMainPage(),
+          '/cashinservice': (context) => const CashInServicePage(),
+          '/gcashform': (context) => const GCashFormPage()
         });
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncappkiosk/helpers/dp_colors.dart';
 import 'package:syncappkiosk/widgets/appheader.dart';
+import 'package:syncappkiosk/widgets/cashinlist.dart';
 import 'package:syncappkiosk/widgets/customcontentwithnavbutton.dart';
 
 class CashInServicePage extends StatelessWidget {
@@ -12,12 +13,12 @@ class CashInServicePage extends StatelessWidget {
       backgroundColor: DpColors.mainBG,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const AppHeader(),
+        children: const [
+          AppHeader(),
           CustomContentWithNavButton(
-            child: Container(
-              child: Text('test1'),
-            ),
+            goBack: '/kioskmain',
+            goTo: '/gcashform',
+            child: CashInList(),
           )
         ],
       ),

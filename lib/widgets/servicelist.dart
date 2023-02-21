@@ -11,6 +11,8 @@ class ServiceList extends StatelessWidget {
       margin: const EdgeInsets.only(left: 40),
       child: Ink(
         child: InkWell(
+          customBorder:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Container(
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
@@ -34,15 +36,15 @@ class ServiceList extends StatelessWidget {
                     size: 66,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5),
+                SizedBox(
+                  height: 65,
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
                       'Cash In',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize: 35,
                           shadows: [
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.25),
@@ -55,7 +57,9 @@ class ServiceList extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed('/cashinservice');
+          },
         ),
       ),
     );

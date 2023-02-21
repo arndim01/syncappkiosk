@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomContentWithNavButton extends StatelessWidget {
   final Widget child;
-  const CustomContentWithNavButton({super.key, required this.child});
+  final String goBack;
+  final String goTo;
+  const CustomContentWithNavButton(
+      {super.key,
+      this.goBack = '/started',
+      this.goTo = '/started',
+      required this.child});
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,9 +28,15 @@ class CustomContentWithNavButton extends StatelessWidget {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10)),
               child: InkWell(
+                customBorder: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(150),
+                        bottomRight: Radius.circular(150))),
                 child: const Icon(Icons.arrow_circle_left_outlined,
                     size: 110, color: Colors.white),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(goBack);
+                },
               ),
             ),
           ),
@@ -45,9 +57,15 @@ class CustomContentWithNavButton extends StatelessWidget {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10)),
               child: InkWell(
+                customBorder: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(150),
+                        bottomLeft: Radius.circular(150))),
                 child: const Icon(Icons.arrow_circle_right_outlined,
                     size: 110, color: Colors.white),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(goTo);
+                },
               ),
             ),
           ),
