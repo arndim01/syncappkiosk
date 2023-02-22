@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
-import 'package:syncappkiosk/widgets/dplogo.dart';
+
+import '../helpers/dp_colors.dart';
+import '../widgets/dplogo.widget.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});

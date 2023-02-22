@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
-import 'package:syncappkiosk/widgets/appheader.dart';
-import 'package:syncappkiosk/widgets/cashinlist.dart';
-import 'package:syncappkiosk/widgets/customcontentwithnavbutton.dart';
+
+import '../helpers/dp_colors.dart';
+import '../widgets/appheader.widget.dart';
+import '../widgets/cashinlist.widget.dart';
+import '../widgets/contentwithnavbutton.widget.dart';
 
 class CashInServicePage extends StatelessWidget {
   const CashInServicePage({super.key});
@@ -17,7 +18,7 @@ class CashInServicePage extends StatelessWidget {
           AppHeader(),
           CustomContentWithNavButton(
             goBack: '/kioskmain',
-            goTo: '/gcashform',
+            hasGoto: false,
             child: CashInList(),
           )
         ],

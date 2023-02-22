@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/widgets/inputform.dart';
 
+import '../widgets/creditform.widget.dart';
 import '../helpers/dp_colors.dart';
-import '../widgets/appheader.dart';
-import '../widgets/customcontentwithnavbutton.dart';
+import '../widgets/appheader.widget.dart';
+import '../widgets/contentwithnavbutton.widget.dart';
 
-class GCashFormPage extends StatelessWidget {
-  const GCashFormPage({super.key});
+class CreditFormPage extends StatelessWidget {
+  const CreditFormPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,11 @@ class GCashFormPage extends StatelessWidget {
         children: const [
           AppHeader(),
           CustomContentWithNavButton(
-              goBack: '/cashinservice', child: InputForm())
+              goBack: '/cashinservice',
+              child: CreditForm())
         ],
       ),
     );
   }
+
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
-import 'package:syncappkiosk/widgets/dplogo.dart';
+
+import '../helpers/dp_colors.dart';
+
 
 class AppHeader extends StatelessWidget {
   const AppHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Row(

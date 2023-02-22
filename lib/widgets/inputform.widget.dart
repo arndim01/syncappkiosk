@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
-import 'package:syncappkiosk/widgets/numpad.dart';
+
+import '../helpers/dp_colors.dart';
+import 'numpad.widget.dart';
 
 class InputForm extends StatefulWidget {
   const InputForm({super.key});
@@ -18,7 +19,7 @@ class _InputFormState extends State<InputForm> {
       Container(
         margin: const EdgeInsets.only(top: 40),
         child: Numpad(
-          buttonSize: 90,
+          buttonSize: 110,
           buttonColor: DpColors.mainBGButtonNumpad,
           iconColor: Colors.deepOrange,
           controller: _myController,

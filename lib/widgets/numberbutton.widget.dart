@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
+
+import '../helpers/dp_colors.dart';
 
 class NumberButton extends StatelessWidget {
   final int number;

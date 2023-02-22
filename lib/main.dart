@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/pages/cashinservicepage.dart';
-import 'package:syncappkiosk/pages/gcashformpage.dart';
-import 'package:syncappkiosk/pages/getstartedpage.dart';
-import 'package:syncappkiosk/pages/kioskmainpage.dart';
-import 'package:syncappkiosk/pages/splashpage.dart';
+import 'package:syncappkiosk/pages/cashinservice.page.dart';
+import 'package:syncappkiosk/pages/creditform.page.dart';
+import 'package:syncappkiosk/pages/gcashform.page.dart';
+import 'package:syncappkiosk/pages/getstarted.page.dart';
+import 'package:syncappkiosk/pages/kioskmain.page.dart';
+import 'package:syncappkiosk/pages/splash.page.dart';
+import 'package:syncappkiosk/widgets/creditform.widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: CreditFormPage(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
