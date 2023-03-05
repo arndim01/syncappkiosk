@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:syncappkiosk/pages/cashinservice.page.dart';
 import 'package:syncappkiosk/pages/creditform.page.dart';
 import 'package:syncappkiosk/pages/gcashform.page.dart';
 import 'package:syncappkiosk/pages/getstarted.page.dart';
 import 'package:syncappkiosk/pages/kioskmain.page.dart';
 import 'package:syncappkiosk/pages/splash.page.dart';
-import 'package:syncappkiosk/widgets/creditform.widget.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: CreditFormPage(),
-  ));
+  runApp( const MaterialApp( debugShowCheckedModeBanner: false, home: LoaderOverlay(child: CreditFormPage()) )
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -11,7 +11,7 @@ class InputForm extends StatefulWidget {
 }
 
 class _InputFormState extends State<InputForm> {
-  final TextEditingController _myController = TextEditingController();
+  final TextEditingController _myController = TextEditingController(text: '09');
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,11 @@ class _InputFormState extends State<InputForm> {
           iconColor: Colors.deepOrange,
           controller: _myController,
           delete: () {
-            _myController.text =
+            if( _myController.text.length > 2 ){
+              
+              _myController.text =
                 _myController.text.substring(0, _myController.text.length - 1);
+            }
           },
           onSubmit: () {
             debugPrint('Your code: ${_myController.text}');

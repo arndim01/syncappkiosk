@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:syncappkiosk/controllers/transaction.controller.dart';
 import 'package:syncappkiosk/helpers/dp_colors.dart';
-
+import '../controllers/message.controller.dart';
 class CreditForm extends StatefulWidget {
   const CreditForm({super.key});
-
   @override
   State<CreditForm> createState() => _CreditState(); 
 }
-
 class _CreditState extends State<CreditForm> {
-final TextEditingController _myController = TextEditingController(text: '10000.00');
+  final TransactionController transactionController = Get.put(TransactionController());
+  final messageController = Get.put(MessageController());
+  @override
+  void initState() {
+    super.initState();
+    transactionController.create('09267310496')
+    .then((value) {
+      print(value);
+    }).onError((error, stackTrace) {
+      print(error);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -29,13 +42,11 @@ final TextEditingController _myController = TextEditingController(text: '10000.0
           child: SizedBox(
             height: 150,
             width: 600,
-            child: TextField(
-            decoration: const InputDecoration( border: InputBorder.none),
-            controller: _myController,
-            textAlign: TextAlign.center ,
-            showCursor: false,
-            readOnly: true,
-            style: TextStyle(
+            child: StreamBuilder(
+              stream: messageController.channel!.stream,
+              builder: (context, snapshot) {
+                messageController.setAmountValue(snapshot.data.toString());
+                return Text( messageController.getTotalAmount().toStringAsFixed(2) , style: TextStyle(
               fontSize: 120,
               color: Colors.white,
               
@@ -45,9 +56,9 @@ final TextEditingController _myController = TextEditingController(text: '10000.0
                   blurRadius: 4,
                   offset: const Offset(0, 4))
               ]
+            ), textAlign: TextAlign.center,);
+              },
             ),
-            keyboardType: TextInputType.none,
-          ),
           ),
         )
       ],
