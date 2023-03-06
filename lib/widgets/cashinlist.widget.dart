@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CashInList extends StatelessWidget {
   const CashInList({super.key});
@@ -36,7 +35,9 @@ class CashInList extends StatelessWidget {
           )
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed('/gcashform3');
+      },
     ));
   }
 }

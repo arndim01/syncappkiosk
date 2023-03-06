@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
+
+import '../helpers/dp_colors.dart';
 
 class NumberButton extends StatelessWidget {
   final int number;
@@ -28,7 +29,10 @@ class NumberButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          controller.text += number.toString();
+          print(controller.text.length);
+          if( controller.text.length < 11 ){
+            controller.text += number.toString();
+          }
         },
         child: Center(
           child: Text(

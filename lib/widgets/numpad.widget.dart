@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'numberbutton.dart';
+import 'numberbutton.widget.dart';
 
 class Numpad extends StatelessWidget {
   final double buttonSize;
@@ -127,7 +126,7 @@ class Numpad extends StatelessWidget {
                   color: iconColor,
                   size: 80,
                 ),
-                iconSize: 70,
+                iconSize: 90,
               ),
             ],
           ),

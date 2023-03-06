@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:syncappkiosk/helpers/dp_colors.dart';
-import 'package:syncappkiosk/widgets/servicelist.dart';
-import 'package:syncappkiosk/widgets/appheader.dart';
+
+import '../helpers/dp_colors.dart';
+import '../widgets/servicelist.widget.dart';
+import '../widgets/appheader.widget.dart';
 
 class KioskMainPage extends StatelessWidget {
   const KioskMainPage({super.key});
