@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../helpers/dp_colors.dart';
 
-
 class AppHeader extends StatelessWidget {
   const AppHeader({super.key});
 
@@ -17,32 +16,40 @@ class AppHeader extends StatelessWidget {
           const SizedBox(),
           Container(
               padding: const EdgeInsets.all(10),
-              width: 180,
-              height: 71,
-              decoration: BoxDecoration(
-                  color: DpColors.mainRed,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 4,
-                        offset: const Offset(0, 4))
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  SizedBox(
-                    child: Icon(
-                      Icons.contact_support_outlined,
-                      color: Colors.white,
-                      size: 35,
-                    ),
+              width: 200,
+              height: 100,
+              child: Ink(
+                decoration: BoxDecoration(
+                    color: DpColors.mainRed,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 4,
+                          offset: const Offset(0, 4))
+                    ]),
+                child: InkWell(
+                  customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      SizedBox(
+                        child: Icon(
+                          Icons.contact_support_outlined,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                      SizedBox(
+                        child: Text('Help',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 25)),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    child: Text('Help',
-                        style: TextStyle(color: Colors.white, fontSize: 25)),
-                  )
-                ],
+                  onTap: () {},
+                ),
               ))
         ],
       ),
