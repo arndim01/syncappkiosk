@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncappkiosk/models/transaction/receipt.model.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class MessageController extends GetxController {
   final GlobalKey scaffoldKey = GlobalKey<ScaffoldState>();
-
   late WebSocketChannel? channel;
   late List<double> amount;
   TextEditingController? textController = TextEditingController();
@@ -27,12 +27,12 @@ class MessageController extends GetxController {
   }
 
   double getTotalAmount() {
-    print(amount);
+    double sum = 0;
     if (amount.isEmpty) {
       return 0;
     }
-
-    return amount.fold(0, (previousValue, element) => previousValue + element);
+    sum = amount.fold(0, (previousValue, element) => previousValue + element);
+    return sum;
   }
 
   void sendMessage(String value) {
@@ -49,7 +49,6 @@ class MessageController extends GetxController {
 
   @override
   void dispose() {
-    print('dispose mee!!!!');
     channel!.sink.close();
     super.dispose();
   }

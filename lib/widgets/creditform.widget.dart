@@ -16,14 +16,13 @@ class _CreditState extends State<CreditForm> {
   final messageController = Get.put(MessageController());
   String referenceNumber = '';
   late Stream broadcastStream;
-
   @override
   void initState() {
     messageController.channel =
         WebSocketChannel.connect(Uri.parse('ws://localhost:1337'));
     broadcastStream = messageController.channel!.stream.asBroadcastStream();
     messageController.amount.clear();
-    referenceNumber = transactionController.referenceNumber;
+    referenceNumber = transactionController.receipt.getReferenceNumber;
     messageController.sendMessage('c');
     super.initState();
   }
@@ -33,6 +32,12 @@ class _CreditState extends State<CreditForm> {
       return false;
     }
     return double.tryParse(str) != null;
+  }
+
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -58,15 +63,19 @@ class _CreditState extends State<CreditForm> {
             child: StreamBuilder(
               stream: broadcastStream,
               builder: (context, snapshot) {
-                messageController.setAmountValue(snapshot.data.toString());
+                transactionController.addAmountValue(snapshot.data.toString());
                 if (referenceNumber != '') {
                   if (_isNumeric(snapshot.data.toString())) {
                     transactionController.createLog(
                         referenceNumber, int.parse(snapshot.data.toString()));
                   }
                 }
+                double sum = 0;
+                for (var n in transactionController.amountList) {
+                  sum+=n;
+                }
                 return Text(
-                  messageController.getTotalAmount().toStringAsFixed(2),
+                  sum.toStringAsFixed(2),
                   style:
                       TextStyle(fontSize: 120, color: Colors.white, shadows: [
                     BoxShadow(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:syncappkiosk/widgets/inputform.widget.dart';
 import '../controllers/transaction.controller.dart';
 import '../helpers/dp_colors.dart';
@@ -18,7 +19,8 @@ class _GcashFormState extends State<GCashFormPage> {
   @override
   Widget build(BuildContext context) {
     transactionController.accountController = TextEditingController(text: '09');
-
+    bool _isLoaderVisible = false;
+  
     return Scaffold(
       backgroundColor: DpColors.mainBG,
       body: Column(
@@ -74,15 +76,80 @@ class _GcashFormState extends State<GCashFormPage> {
                             bottomLeft: Radius.circular(300))),
                     child: const Icon(Icons.arrow_circle_right_outlined,
                         size: 140, color: Colors.white),
-                    onTap: () {
-                      transactionController
-                          .create(transactionController.accountController.text)
-                          .then((value) {
-                        transactionController.referenceNumber = value!;
-                        Navigator.of(context).pushNamed('/creditform');
-                      }).onError((error, stackTrace) {
-                        print(error);
-                      });
+                    onTap: () async {
+                      context.loaderOverlay.show();                
+                      if( transactionController.accountController.text.toString().length != 11 ){
+
+                        showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 50, top: 10, right: 50),
+                                    actionsPadding: const EdgeInsets.all(20),
+                                    title: const Text('Error Transaction',
+                                        style: TextStyle(fontSize: 80)),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: const <Widget>[
+                                          Text(
+                                              'Invalid account number.',
+                                              style: TextStyle(fontSize: 50))
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Ok',
+                                            style: TextStyle(fontSize: 60)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                                  context.loaderOverlay.hide(); 
+                      }else{
+                        await transactionController.create(transactionController.accountController.text)
+                        .then((value){
+                          transactionController.referenceNumber = value!;
+                          transactionController.setTransactionDetails(value, transactionController.accountController.text);
+                          context.loaderOverlay.hide();
+                          Navigator.of(context).pushNamed('/creditform');
+                        }).onError((error, stackTrace) {
+                          context.loaderOverlay.hide();
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 50, top: 10, right: 50),
+                                    actionsPadding: const EdgeInsets.all(20),
+                                    title: const Text('Error Transaction',
+                                        style: TextStyle(fontSize: 80)),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: const <Widget>[
+                                          Text(
+                                              'Failed to communicate.',
+                                              style: TextStyle(fontSize: 50)),
+                                          Text(
+                                              'Please contact the admin.',
+                                              style: TextStyle(fontSize: 50))
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Ok',
+                                            style: TextStyle(fontSize: 60)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                        });
+                      }
+                      
                     },
                   ),
                 ),
