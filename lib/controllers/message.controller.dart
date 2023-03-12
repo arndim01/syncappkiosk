@@ -1,44 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncappkiosk/models/transaction/receipt.model.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-
-
-class MessageController extends GetxController{
+class MessageController extends GetxController {
   final GlobalKey scaffoldKey = GlobalKey<ScaffoldState>();
-
-  late final WebSocketChannel? channel;
-  late final List<double> _amount;
+  late WebSocketChannel? channel;
+  late List<double> amount;
   TextEditingController? textController = TextEditingController();
 
-  void setAmountValue(String value){
-    if( _isNumeric(value)  ) {
-      _amount.add(double.parse(value));
+  void setAmountValue(String value) {
+    if (_isNumeric(value)) {
+      amount.add(double.parse(value));
     }
   }
+
+  void setNewValue() {
+    channel!.sink.close();
+  }
+
   bool _isNumeric(String str) {
-    if(str.isEmpty) {
+    if (str.isEmpty) {
       return false;
     }
     return double.tryParse(str) != null;
   }
-  double getTotalAmount(){
-    return _amount.fold(0, (previousValue, element) => previousValue + element);
-  } 
 
-  void sendMessage(){
-    if( textController!.text.isNotEmpty ){
-      channel!.sink.add(textController!.text);
+  double getTotalAmount() {
+    double sum = 0;
+    if (amount.isEmpty) {
+      return 0;
+    }
+    sum = amount.fold(0, (previousValue, element) => previousValue + element);
+    return sum;
+  }
+
+  void sendMessage(String value) {
+    if (value.isNotEmpty) {
+      channel!.sink.add(value);
     }
   }
 
   @override
-  void onInit(){
+  void onInit() {
     super.onInit();
-    _amount = List.empty(growable: true);
-    channel = WebSocketChannel.connect(
-      Uri.parse('ws://localhost:1337')
-    );
+    amount = List.empty(growable: true);
   }
 
   @override
@@ -46,5 +52,4 @@ class MessageController extends GetxController{
     channel!.sink.close();
     super.dispose();
   }
-
 }

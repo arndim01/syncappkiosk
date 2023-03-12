@@ -36,7 +36,7 @@ class CashInList extends StatelessWidget {
         ],
       ),
       onTap: () {
-        Navigator.of(context).pushNamed('/gcashform3');
+        Navigator.of(context).pushNamed('/gcashform');
       },
     ));
   }

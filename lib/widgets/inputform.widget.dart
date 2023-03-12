@@ -4,15 +4,14 @@ import '../helpers/dp_colors.dart';
 import 'numpad.widget.dart';
 
 class InputForm extends StatefulWidget {
-  const InputForm({super.key});
+  final TextEditingController myController;
+  const InputForm({super.key, required this.myController});
 
   @override
   State<InputForm> createState() => _InputFormState();
 }
 
 class _InputFormState extends State<InputForm> {
-  final TextEditingController _myController = TextEditingController(text: '09');
-
   @override
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -22,20 +21,19 @@ class _InputFormState extends State<InputForm> {
           buttonSize: 110,
           buttonColor: DpColors.mainBGButtonNumpad,
           iconColor: Colors.deepOrange,
-          controller: _myController,
+          controller: widget.myController,
           delete: () {
-            if( _myController.text.length > 2 ){
-              
-              _myController.text =
-                _myController.text.substring(0, _myController.text.length - 1);
+            if (widget.myController.text.length > 2) {
+              widget.myController.text = widget.myController.text
+                  .substring(0, widget.myController.text.length - 1);
             }
           },
           onSubmit: () {
-            debugPrint('Your code: ${_myController.text}');
+            debugPrint('Your code: ${widget.myController.text}');
             showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
-                      content: Text("Your code is ${_myController.text}",
+                      content: Text("Your code is ${widget.myController.text}",
                           style: const TextStyle(fontSize: 30)),
                     ));
           },
@@ -57,7 +55,7 @@ class _InputFormState extends State<InputForm> {
                 child: Center(
                   child: TextField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    controller: _myController,
+                    controller: widget.myController,
                     textAlign: TextAlign.right,
                     showCursor: false,
                     style: TextStyle(
