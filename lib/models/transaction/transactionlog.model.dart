@@ -10,4 +10,10 @@ class TransactionLog {
     data['amount'] = amount;
     return data;
   }
+
+  Map<String, dynamic> updateLogToJson(){
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['referenceNumber'] = referenceNumber;
+    return data;
+  }
 }

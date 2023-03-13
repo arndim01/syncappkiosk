@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncappkiosk/controllers/transaction.controller.dart';
 import '../controllers/message.controller.dart';
 import '../widgets/creditform.widget.dart';
 import '../helpers/dp_colors.dart';
@@ -14,6 +15,7 @@ class CreditFormPage extends StatefulWidget {
 
 class _CreditFormState extends State<CreditFormPage> {
   final messageController = Get.put(MessageController());
+  final transactionController = Get.put(TransactionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +111,17 @@ class _CreditFormState extends State<CreditFormPage> {
                             bottomLeft: Radius.circular(300))),
                     child: const Icon(Icons.arrow_circle_right_outlined,
                         size: 140, color: Colors.white),
-                    onTap: () {},
+                    onTap: () async {
+                      messageController.sendMessage('r');
+                      messageController.setNewValue();
+                      transactionController.setTransactionAmountDetails();
+                      transactionController.updateLog(transactionController.receipt.getReferenceNumber)
+                        .then((value) {
+                          Navigator.of(context).pushNamed('/receiptform');
+                        }).onError((error, stackTrace){
+                          print(error);
+                        });
+                    },
                   ),
                 ),
               )
