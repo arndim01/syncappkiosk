@@ -1,15 +1,7 @@
 #!/bin/sh
-set -eux
+set -x
 
-# Setup diagnostic
-mkdir -p "$(dirname "$MIR_SERVER_DIAGNOSTIC_PATH")" -m 777
-
-# we install with the daemon disabled, the configure hook
-# will start and enable it if appropriate
-snapctl stop --disable "$SNAP_INSTANCE_NAME.daemon"
-
-daemon=$(snapctl get daemon)
-if [ "$daemon" = "" ]
+if [ "$(snapctl get daemon)" = "" ]
 then
   if grep -q -e snap_core= -e snapd_recovery_mode= /proc/cmdline
   then snapctl set daemon=true
