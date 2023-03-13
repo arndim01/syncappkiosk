@@ -10,8 +10,8 @@ base: core20
 apps:
   syncappkiosk:
     command-chain: &_command-chain
-      - bin/wayland-launch
-    command: &_command bin/syncappkiosk
+      - syncappkiosk/wayland-launch/bin/wayland-launch
+    command: syncappkiosk
     plugs: &_plugs
       - opengl
       - wayland
