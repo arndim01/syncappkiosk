@@ -10,7 +10,7 @@ base: core20
 apps:
   syncappkiosk:
     command-chain: &_command-chain
-      - syncappkiosk/wayland-launch/bin/wayland-launch
+      - wayland-launch/bin/wayland-launch
     command: syncappkiosk
     plugs: &_plugs
       - opengl
@@ -151,8 +151,8 @@ parts:
       # The plugs needed to run Wayland. (wayland-launch checks them, setup.sh connects them)
       # You may add further plugs here if you want these options
       PLUGS="opengl wayland graphics-core20"
-      sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/bin/wayland-launch
-      sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/bin/setup.sh
+      sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/wayland-launch/bin/wayland-launch
+      sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/wayland-launch/bin/setup.sh
       snapcraftctl build
     stage-packages:
       - inotify-tools
