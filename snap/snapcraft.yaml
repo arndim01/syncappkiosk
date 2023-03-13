@@ -110,7 +110,7 @@ parts:
 
   syncappkiosk:
     plugin: nil
-    source: syncappkiosk
+    source: .
     build-snaps:
       - flutter/latest/stable
     build-environment:
