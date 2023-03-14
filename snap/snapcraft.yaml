@@ -3,20 +3,95 @@
   summary: Sync App Kiosk # 79 char long summary
   description: Sync App Kiosk
   confinement: strict
-  base: core18
+  base: core20
   grade: stable
-
-  architectures:
-    - build-on: [ amd64 ]
-    - build-on: [ arm64 ]
-
-  parts:
-    syncappkiosk:
-      plugin: flutter
-      source: .
-      flutter-target: lib/main.dart
 
   apps:
     syncappkiosk:
-      command: syncappkiosk
-      extensions: [flutter-dev]
+      command-chain: &_command-chain
+        - bin/wayland-launch
+      command: &_command # Command to launch your application
+      plugs: &_plugs
+        - opengl
+        - wayland
+
+    daemon:
+      daemon: simple
+      restart-delay: 3s
+      restart-condition: always
+      command-chain: *_command-chain
+      command: *_command
+      plugs: *_plugs
+
+  plugs:
+    graphics-core20:
+      interface: content
+      target: $SNAP/graphics
+      default-provider: mesa-core20
+
+  environment:
+    # This is one of four snippets that relate to providing the userspace graphics needed by your application.
+    LD_LIBRARY_PATH:    $SNAP/graphics/lib
+    LIBGL_DRIVERS_PATH: $SNAP/graphics/dri
+    LIBVA_DRIVERS_PATH: $SNAP/graphics/dri
+    __EGL_VENDOR_LIBRARY_DIRS: $SNAP/graphics/glvnd/egl_vendor.d
+    # Other, generally useful environment settings...
+    # XDG config
+    XDG_CACHE_HOME:  $SNAP_USER_COMMON/.cache
+    XDG_CONFIG_HOME: $SNAP_USER_DATA/.config
+    XDG_CONFIG_DIRS: $SNAP/etc/xdg
+    # XKB config
+    XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
+
+  layout:
+    # This is one of four snippets that relate to providing the userspace graphics needed by your application.
+    # These paths (/usr/share/libdrm and /usr/share/drirc.d) are hardcoded in mesa.
+    /usr/share/libdrm:  # Needed by mesa-core20 on AMD GPUs
+      bind: $SNAP/graphics/libdrm
+    /usr/share/drirc.d:  # Used by mesa-core20 for app specific workarounds
+      bind: $SNAP/graphics/drirc.d
+    # Other, generally useful paths
+    /usr/share/fonts:
+      bind: $SNAP/usr/share/fonts
+    /usr/share/icons:
+      bind: $SNAP/usr/share/icons
+    /usr/share/sounds:
+      bind: $SNAP/usr/share/sounds
+    /etc/fonts:
+      bind: $SNAP/etc/fonts
+
+  parts:
+    # Your application packaging goes here
+
+    # Some utility scripts for setting up the Wayland environment
+    wayland-launch:
+      plugin: dump
+      source: wayland-launch
+      override-build: |
+        # The plugs needed to run Wayland. (wayland-launch checks them, setup.sh connects them)
+        # You may add further plugs here if you want these options
+        PLUGS="opengl wayland graphics-core20"
+        sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/bin/wayland-launch
+        sed --in-place "s/%PLUGS%/$PLUGS/g" $SNAPCRAFT_PART_BUILD/bin/setup.sh
+        snapcraftctl build
+      stage-packages:
+        - inotify-tools
+
+  cleanup:
+    after:
+      # Your application packaging
+      - wayland-launch
+    plugin: nil
+    build-snaps: [ mesa-core20 ]
+    override-prime: |
+      set -eux
+      cd /snap/mesa-core20/current/egl/lib
+      find . -type f,l -exec rm -f $SNAPCRAFT_PRIME/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/{} \;
+      rm -fr "$SNAPCRAFT_PRIME/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri"
+      for CRUFT in bug drirc.d glvnd libdrm lintian man; do
+        rm -rf "$SNAP
+
+  architectures:
+    - build-on: amd64
+    - build-on: armhf
+    - build-on: arm64
