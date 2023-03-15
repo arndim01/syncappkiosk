@@ -51,7 +51,7 @@ class _InputFormState extends State<InputForm> {
                   const EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               child: SizedBox(
                 height: 60,
-                width: 300,
+                width: 310,
                 child: Center(
                   child: TextField(
                     decoration: const InputDecoration(border: InputBorder.none),
