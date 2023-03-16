@@ -25,6 +25,8 @@ jobs:
     needs: [build]
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Build flutter web
+        run: flutter build web
       - name: Upload web content
         uses: actions/upload-artifact@master
         with:
