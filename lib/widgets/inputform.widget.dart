@@ -18,7 +18,7 @@ class _InputFormState extends State<InputForm> {
       Container(
         margin: const EdgeInsets.only(top: 40),
         child: Numpad(
-          buttonSize: 110,
+          buttonSize: 90,
           buttonColor: DpColors.mainBGButtonNumpad,
           iconColor: Colors.deepOrange,
           controller: widget.myController,
@@ -51,7 +51,7 @@ class _InputFormState extends State<InputForm> {
                   const EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               child: SizedBox(
                 height: 60,
-                width: 310,
+                width: 280,
                 child: Center(
                   child: TextField(
                     decoration: const InputDecoration(border: InputBorder.none),
@@ -59,7 +59,7 @@ class _InputFormState extends State<InputForm> {
                     textAlign: TextAlign.right,
                     showCursor: false,
                     style: TextStyle(
-                        fontSize: 50,
+                        fontSize: 40,
                         color: DpColors.mainBlack,
                         shadows: [
                           BoxShadow(
