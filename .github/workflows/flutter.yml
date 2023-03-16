@@ -20,7 +20,15 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build web
+      - name: Install flutter dependencies
+        run: flutter pub get
+      - name: Run flutter test
+        run: flutter test
+      - name: Build flutter web
+        run: flutter build web
+      - name: Upload web content
+        uses: actions/upload-artifact@master
+        with:
+          name: web-build
+          path: build/web
 
