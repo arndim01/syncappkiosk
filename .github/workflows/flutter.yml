@@ -28,7 +28,7 @@ jobs:
       - name: Build flutter web
         run: flutter build web
       - name: Upload web content
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: web-build
           path: build/web
@@ -39,9 +39,27 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v3
         with:
           name: web-build
-      - name: Test artifact download
-        run: ls -R
-
+      - name: Archive site content
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: web.zip
+      - name: Create GitHub release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: ./web.zip
+          asset_name: site-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
