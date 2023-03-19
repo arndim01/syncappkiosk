@@ -112,15 +112,46 @@ class _CreditFormState extends State<CreditFormPage> {
                     child: const Icon(Icons.arrow_circle_right_outlined,
                         size: 140, color: Colors.white),
                     onTap: () async {
-                      messageController.sendMessage('r');
-                      messageController.setNewValue();
-                      transactionController.setTransactionAmountDetails();
-                      transactionController.updateLog(transactionController.receipt.getReferenceNumber)
-                        .then((value) {
-                          Navigator.of(context).pushNamed('/receiptform');
-                        }).onError((error, stackTrace){
-                          print(error);
-                        });
+
+                      if( transactionController.amountList.isEmpty ){
+                        showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 50, top: 10, right: 50),
+                                    actionsPadding: const EdgeInsets.all(20),
+                                    title: const Text('Error Transaction',
+                                        style: TextStyle(fontSize: 80)),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: const <Widget>[
+                                          Text(
+                                              'Zero amount. Insert coins/bills.',
+                                              style: TextStyle(fontSize: 50))
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Ok',
+                                            style: TextStyle(fontSize: 60)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                      }else{  
+                        messageController.sendMessage('r');
+                        messageController.setNewValue();
+                        transactionController.setTransactionAmountDetails();
+                        transactionController.updateLog(transactionController.receipt.getReferenceNumber)
+                          .then((value) {
+                            Navigator.of(context).pushNamed('/receiptform');
+                          }).onError((error, stackTrace){
+                            print(error);
+                          });
+                      }
                     },
                   ),
                 ),

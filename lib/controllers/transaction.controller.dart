@@ -53,12 +53,44 @@ class TransactionController extends GetxController {
   void setTransactionAmountDetails()
   {
     double sum = 0;
+    double tempfee = 2;
     for (var n in amountList) {
       sum+=n;
     }
-    print(sum);
+
+    if( sum >= 25 && sum <= 200 ){
+            tempfee = 5;
+        }else if(sum > 200 && sum <= 500 ){
+            tempfee = 10;
+        }else if(sum > 500 && sum < 1000){
+            tempfee = 15;
+        }else if(sum >= 1000 && sum < 2000){
+            tempfee = 20;
+        }else if(sum >= 2000 && sum < 3000){
+            tempfee = 40;
+        }else if(sum >= 3000 && sum < 4000){
+            tempfee = 60;
+        }else if(sum >= 4000 && sum < 5000){
+            tempfee = 80;
+        }else if(sum >= 5000 && sum < 6000){
+            tempfee = 100;
+        }else if(sum >= 6000 && sum < 7000){
+            tempfee = 120;
+        }else if(sum >= 7000 && sum < 8000){
+            tempfee = 140;
+        }else if(sum >= 8000 && sum < 9000){
+            tempfee = 160;
+        }else if(sum >= 9000 && sum < 10000){
+            tempfee = 180;
+        }else if(sum >= 10000){
+            tempfee = 200;
+        }else{
+            tempfee = 2;
+        }
+
+
     receipt.setAmount = sum;
-    receipt.setFee = 10;
+    receipt.setFee = tempfee;
     receipt.setCashIn = sum - receipt.getFee;
   }
 

@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           return null;
         },
         routes: {
-          '/': (context) => const SplashPage(duration: 2, goToPage: '/started'),
+          '/': (context) => const SplashPage(duration: 30, goToPage: '/started'),
           '/kioskmain': (context) => const KioskMainPage(),
           '/cashinservice': (context) => const CashInServicePage(),
           '/gcashform': (context) => const LoaderOverlay(
