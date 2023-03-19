@@ -49,7 +49,7 @@ class _CreditFormState extends State<CreditFormPage> {
                       child: const Icon(Icons.arrow_circle_left_outlined,
                           size: 140, color: Colors.white),
                       onTap: () {
-                        if (messageController.getTotalAmount() == 0) {
+                        if (transactionController.amountList.isEmpty) {
                           messageController.sendMessage('r');
                           messageController.setNewValue();
                           Navigator.of(context).pushNamed('/gcashform');
