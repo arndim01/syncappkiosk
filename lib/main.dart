@@ -57,7 +57,18 @@ class MyApp extends StatelessWidget {
             overlayOpacity: 0.8,
             overlayWholeScreen: true,
             child: GCashFormPage()) ,
-          '/creditform': (context) => const CreditFormPage(),
+          '/creditform': (context) => const LoaderOverlay(
+            useDefaultLoading:  false,
+            overlayWidget: Center(
+              child: SpinKitCubeGrid(
+                color: DpColors.mainBlue,
+                size: 50.0,
+              ),
+            ),
+            overlayOpacity: 0.8,
+            overlayWholeScreen: true,
+            child: CreditFormPage()
+          ) ,
           '/receiptform': (context) => ReceiptPage()
         });
   }
