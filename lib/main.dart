@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           return null;
         },
         routes: {
-          '/': (context) => const SplashPage(duration: 30, goToPage: '/started'),
+          '/': (context) => const SplashPage(duration: 1, goToPage: '/started'),
           '/kioskmain': (context) => const KioskMainPage(),
           '/cashinservice': (context) => const CashInServicePage(),
           '/gcashform': (context) => const LoaderOverlay(
@@ -57,7 +57,18 @@ class MyApp extends StatelessWidget {
             overlayOpacity: 0.8,
             overlayWholeScreen: true,
             child: GCashFormPage()) ,
-          '/creditform': (context) => const CreditFormPage(),
+          '/creditform': (context) => const LoaderOverlay(
+            useDefaultLoading:  false,
+            overlayWidget: Center(
+              child: SpinKitCubeGrid(
+                color: DpColors.mainBlue,
+                size: 50.0,
+              ),
+            ),
+            overlayOpacity: 0.8,
+            overlayWholeScreen: true,
+            child: CreditFormPage()
+          ) ,
           '/receiptform': (context) => ReceiptPage()
         });
   }
